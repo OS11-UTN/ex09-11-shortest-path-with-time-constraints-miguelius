@@ -30,7 +30,7 @@ if __name__ == '__main__':
     opt_max = (None, -1, None)
     for λ in λs:
         C_monio = C + λ*t
-        res = linprog(C_monio,  A_eq=Aeq, b_eq=beq, bounds=bounds, method='simplex')
+        res = linprog(C_monio,  A_eq=Aeq, b_eq=beq, bounds=bounds, method='revised simplex')
 
         opt = res.fun - λ * T
         opts.append(opt)
@@ -47,10 +47,10 @@ if __name__ == '__main__':
     fig = plt.figure()
     ax = fig.add_subplot()
     ax.annotate(f'λ = {opt_max[0]}  Č = {opt_max[1]:.2f}',
-                xy=( opt_max[0], opt_max[1]), xytext=(opt_max[0], opt_max[1] + 3 ), horizontalalignment="center",
+                xy=( opt_max[0], opt_max[1]), xytext=(opt_max[0], opt_max[1] + 2 ), horizontalalignment="center",
                 arrowprops=dict(facecolor='black', shrink=0.05),
                 )
-    ax.set_ylim(0, 20)
+    ax.set_ylim(0, 8)
     plt.plot ( λs, opts)
     plt.show()
 
