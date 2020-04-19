@@ -51,7 +51,7 @@ if __name__ == '__main__':
         res = linprog(C_monio,  A_eq=Aeq, b_eq=beq, bounds=bounds, method='revised simplex')
         subgradiente = np.dot(t, res.x) - T
         step = 1/(i**1)
-        λiMasUno = λ + step * subgradiente
+        λiMasUno = max(λ + step * subgradiente, 0)
         diff = abs(λiMasUno - λ)
         λs.append(λ)
         opts.append( np.dot(C_monio, res.x) )
